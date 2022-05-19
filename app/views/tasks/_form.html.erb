@@ -19,6 +19,11 @@
     <%= form.label :detail %>
     <%= form.text_field :detail %>
   </div>
+  <div class="task_dead_line">
+    <%= form.label :dead_line %>
+    <%= form.datetime_select :dead_line %>
+  </div>
+
   <%= form.submit %>
 <% end %>
 
