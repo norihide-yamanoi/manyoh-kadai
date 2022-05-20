@@ -4,20 +4,21 @@ class TasksController < ApplicationController
   def index
     if params[:sort_expired]
       @tasks = Task.all.order(dead_line: :desc)
+    elsif params[:sort_priority]
+      @tasks = Task.all.order(priority: :asc)
     else
       @tasks = Task.all.order(created_at: :desc)
     end
 
-    if params[:name].present? && params[:status].present?
-     #両方name and statusが成り立つ検索結果を返す
-      @tasks = Task.where('name LIKE ?', "%#{params[:name]}%")
-      @tasks = @tasks.where(status: params[:status])
+    if params[:name].present? && params[:number].present?
+      #両方name and statusが成り立つ検索結果を返す
+      @tasks = Task.search_name(params[:name]).search_status(params[:number])
       #渡されたパラメータがtask nameのみだったとき
     elsif params[:name].present?
-      @tasks = Task.where('name LIKE ?', "%#{params[:name]}%")
+      @tasks = Task.search_name(params[:name])
       #渡されたパラメータがステータスのみだったとき
-    elsif params[:status].present?
-      @tasks = Task.where(status: params[:status])
+    elsif params[:number].present?
+      @tasks = Task.search_status(params[:number])
     end
   end
 
