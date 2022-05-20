@@ -4,10 +4,14 @@
   <%= form.hidden_field :name %>
   <%= form.hidden_field :detail %>
   <%= form.hidden_field :dead_line %>
+  <%= form.hidden_field :status %>
+  <%= form.hidden_field :priority %>
 
   <p>名前:<%= @task.name %></p>
   <p>詳細:<%= @task.detail %></p>
   <p>終了期限:<%= @task.dead_line %></p>
+  <p>状態:<%= @task.status %></p>
+  <p>優先順位:<%= @task.priority %></p>
 
   <%= form.submit  "登録する" %>
 

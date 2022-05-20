@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    if params[:sort]
+    if params[:sort_expired]
       @tasks = Task.all.order(dead_line: :desc)
     else
       @tasks = Task.all.order(created_at: :desc)
@@ -42,7 +42,7 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to tasks_path, notice:"ブログを削除しました！"
+    redirect_to tasks_path, notice:"タスクを削除しました！"
   end
 
   def confirm
@@ -54,7 +54,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:name, :detail, :dead_line)
+    params.require(:task).permit(:name, :detail, :dead_line, :status, :priority)
   end
 
   def set_task
