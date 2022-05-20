@@ -7,6 +7,18 @@ class TasksController < ApplicationController
     else
       @tasks = Task.all.order(created_at: :desc)
     end
+
+    if params[:name].present? && params[:status].present?
+     #両方name and statusが成り立つ検索結果を返す
+      @tasks = Task.where('name LIKE ?', "%#{params[:name]}%")
+      @tasks = @tasks.where(status: params[:status])
+      #渡されたパラメータがtask nameのみだったとき
+    elsif params[:name].present?
+      @tasks = Task.where('name LIKE ?', "%#{params[:name]}%")
+      #渡されたパラメータがステータスのみだったとき
+    elsif params[:status].present?
+      @tasks = Task.where(status: params[:status])
+    end
   end
 
   def new
@@ -60,5 +72,4 @@ class TasksController < ApplicationController
   def set_task
     @task = Task.find(params[:id])
   end
-
 end

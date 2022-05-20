@@ -2,6 +2,13 @@
 
 <p><%= notice %></p>
 
+<%= form_with url: tasks_path, method: :get, local: true do |form| %>
+  <%= form.text_field :name %>
+  <%= form.submit '検索' %>
+  <%= form.label :状態 %>
+  <%= form.select :status, Task.statuses.keys.to_a, { include_blank:'選択してください'} %>
+<% end %>
+
 <table>
   <tr>
     <th>名前</th>
@@ -24,6 +31,7 @@
     <td><%= link_to 'タスクを削除する', task_path(task.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } %></td>
   </tr>
 <% end %>
+
 </table>
 
 <%= link_to '新しくタスクを登録する', new_task_path %>
