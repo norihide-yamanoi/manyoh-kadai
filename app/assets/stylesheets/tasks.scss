@@ -1,3 +1,27 @@
-// Place all the styles related to the tasks controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+.check a{
+  color: blue;
+}
+.check{
+ color: #555555; /* 文字色 */
+ background-color: #ffcccc; /* 背景色 */
+ box-shadow: 0 0 10px 10px #ffcccc; /* 影 */
+}
+.edit a{
+  color: green;
+}
+.edit{
+ color: #555555; /* 文字色 */
+ background-color: #ffcccc; /* 背景色 */
+ box-shadow: 0 0 10px 10px #ffcccc; /* 影 */
+}
+.delete a{
+  color: red;
+}
+.delete{
+ color: #555555; /* 文字色 */
+ background-color: #ffcccc; /* 背景色 */
+ box-shadow: 0 0 10px 10px #ffcccc; /* 影 */
+}
+.table{
+  text-align: center;
+}
