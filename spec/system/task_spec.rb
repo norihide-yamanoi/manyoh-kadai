@@ -80,7 +80,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       it '該当タスクの内容が表示される' do
         task = FactoryBot.create(:task)
         visit tasks_path
-        click_on "内容を確認する"
+        click_on "確認"
         expect(page).to have_content 'テストネーム０１'
       end
     end
@@ -91,7 +91,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       it "終了期限の降順に並び替えられたタスク一覧が表示される" do
         task = FactoryBot.create(:task),FactoryBot.create(:second_task)
         visit tasks_path
-        click_on "終了期限でソートする"
+        click_on "終了期限"
         task_list = all('.task_row')
         expect(task_list[0]).to have_content 'テストネーム０２'
       end
@@ -100,7 +100,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       it "優先順位の昇順に並び替えられたタスク一覧が表示される" do
         task = FactoryBot.create(:task),FactoryBot.create(:second_task)
         visit tasks_path
-        click_on "優先順位でソートする"
+        click_on "優先順位"
         task_list = all('.task_row')
         expect(task_list[0]).to have_content 'テストネーム０２'
       end
