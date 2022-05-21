@@ -9,7 +9,7 @@
   <%= form.select :number, Task.statuses.keys.to_a, { include_blank:'選択してください'} %>
 <% end %>
 
-<table>
+<table class="table">
   <tr>
     <th>名前</th>
     <th>詳細</th>
@@ -34,7 +34,7 @@
 
 </table>
 
-<%= link_to '新しくタスクを登録する', new_task_path %>
+<%= link_to '新しくタスクを登録する', new_task_path, class:"btn btn-primary" %>
 <%= link_to '終了期限でソートする', tasks_path(sort_expired: "true") %>
 <%= link_to '優先順位でソートする', tasks_path(sort_priority: "true") %>
 

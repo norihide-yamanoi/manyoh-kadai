@@ -1,10 +1,16 @@
 FactoryBot.define do
   factory :task do
-    name { 'Factoryで作ったデフォルトのタイトル１' }
-    detail { 'Factoryで作ったデフォルトのコンテント１' }
+    name { 'テストネーム０１' }
+    detail { 'テストディティール０１' }
+    dead_line { '2020-05-05'}
+    status {'完了'}
+    priority {'低'}
   end
   factory :second_task, class: Task do
-    name { 'Factoryで作ったデフォルトのタイトル２' }
-    detail { 'Factoryで作ったデフォルトのコンテント２' }
+    name { 'テストネーム０２' }
+    detail { 'テストディティール０２' }
+    dead_line { '2023-01-01'}
+    status {'未着手'}
+    priority {'高'}
   end
 end
