@@ -6,4 +6,6 @@ class Task < ApplicationRecord
 
   scope :search_name, -> name {where("name LIKE ?", "%#{name}%")}
   scope :search_status, -> status {where(status: status)}
+
+  belongs_to :user
 end
