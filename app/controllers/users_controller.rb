@@ -23,7 +23,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @tasks = @user.tasks
+    @tasks = @user.tasks.page(params[:page])
     if @user.id != current_user.id
       flash[:notice] = 'このページにはアクセスできません‼︎'
       redirect_to tasks_path

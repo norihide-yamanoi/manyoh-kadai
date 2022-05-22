@@ -2,8 +2,6 @@
 
 <p>メールアドレス: <%= @user.email %></p>
 
-
-
 <table>
   <thead>
     <tr>
@@ -29,3 +27,4 @@
   </tbody>
 </table>
 <%= link_to "タスク一覧画面へ", tasks_path %>
+<%= paginate @tasks %>
