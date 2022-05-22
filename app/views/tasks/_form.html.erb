@@ -12,13 +12,26 @@
   <% end %>
 
   <div class="task_name">
-    <%= form.label :name %>
+    <%= form.label :名前 %>
     <%= form.text_field :name %>
   </div>
   <div class="task_detail">
-    <%= form.label :detail %>
+    <%= form.label :詳細 %>
     <%= form.text_field :detail %>
   </div>
+  <div class="task_dead_line">
+    <%= form.label :終了期限 %>
+    <%= form.date_select :dead_line %>
+  </div>
+  <div class="task_status">
+    <%= form.label :状態 %>
+    <%= form.select :status, Task.statuses.keys.to_a %>
+  </div>
+  <div class="task_priority">
+    <%= form.label :優先順位 %>
+    <%= form.select :priority, Task.priorities.keys.to_a %>
+  </div>
+
   <%= form.submit %>
 <% end %>
 
