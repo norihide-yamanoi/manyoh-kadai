@@ -8,6 +8,7 @@ RSpec.describe 'タスク管理機能', type: :system do
 
     context 'タイトルであいまい検索をした場合' do
       it "検索キーワードを含むタスクで絞り込まれる" do
+      sleep 1.0
       visit tasks_path
       fill_in 'name', with: 'テスト'
       click_on '検索'
@@ -92,6 +93,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         task = FactoryBot.create(:task),FactoryBot.create(:second_task)
         visit tasks_path
         click_on "終了期限"
+        sleep 1.0
         task_list = all('.task_row')
         expect(task_list[0]).to have_content 'テストネーム０２'
       end
@@ -101,6 +103,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         task = FactoryBot.create(:task),FactoryBot.create(:second_task)
         visit tasks_path
         click_on "優先順位"
+        sleep 1.0
         task_list = all('.task_row')
         expect(task_list[0]).to have_content 'テストネーム０２'
       end
