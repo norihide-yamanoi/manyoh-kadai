@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   def index
     #@tasks = current_user.tasks
     if params[:sort_expired]
-      @tasks = current_user.tasks(dead_line: :desc).page(params[:page])
+      @tasks = current_user.tasks.order(dead_line: :desc).page(params[:page])
     elsif params[:sort_priority]
       @tasks = current_user.tasks.order(priority: :asc).page(params[:page])
     else
