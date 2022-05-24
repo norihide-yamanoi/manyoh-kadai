@@ -1,9 +1,9 @@
 module Admin::UsersHelper
-  def choose_new_or_edit
+  def choose_new_or_edit_admin
     if action_name == 'new' || action_name == 'create'
-      confirm_users_path
+      confirm_admin_users_path
     elsif action_name == 'edit'
-      user_path
+      admin_user_path
     end
   end
 end

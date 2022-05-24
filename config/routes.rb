@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   resources :sessions
   resources :users
   namespace :admin do
-    resources :users
+    resources :users do
+      collection do
+        post :confirm
+      end
+    end
   end
   resources :tasks do
     collection do

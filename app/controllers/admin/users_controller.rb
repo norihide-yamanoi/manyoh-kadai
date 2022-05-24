@@ -2,10 +2,10 @@ class Admin::UsersController < ApplicationController
   before_action :admin_user
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
-
   def index
-    @users = User.all
+    @users = User.all.includes(:tasks).page(params[:page])
   end
+
   def new
     @user = User.new
   end
@@ -24,6 +24,8 @@ class Admin::UsersController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:id])
+    @tasks = @user.tasks.page(params[:page])
   end
 
   def edit
@@ -39,18 +41,19 @@ class Admin::UsersController < ApplicationController
 
   def destroy
     @user.destroy
-    redirect_to admin_users_path, notice:"ユーザーを削除しました！"
+    redirect_to admin_users_path, notice:"ユーザーを削除しました！",confirm: '本当に削除していいですか？'
   end
 
   def confirm
-    @user = current_user.users.build(user_params)
+    @user = User.new(user_params)
     render :new if @user.invalid?
   end
 
   private
 
   def admin_user
-    redirect_to(root_path) unless current_user.admin?
+    unless current_user.admin?
+    redirect_to(tasks_path)
     flash[:danger] = '管理者以外立ち入り禁止‼︎'
   end
 
@@ -60,5 +63,6 @@ class Admin::UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
-  en
+  end
+end
 end
