@@ -1,6 +1,6 @@
 require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
-  let!(:user) { FactoryBot.create(:user) }
+  let!(:user) { FactoryBot.create(:admin_user) }
   let!(:task) { FactoryBot.create(:task, user: user) }
   let!(:second_task) { FactoryBot.create(:second_task, user: user) }
     before do
@@ -10,7 +10,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       click_on "Log in"
       visit tasks_path
     end
-  
+
   describe '検索機能' do
     context 'タイトルであいまい検索をした場合' do
       it "検索キーワードを含むタスクで絞り込まれる" do
