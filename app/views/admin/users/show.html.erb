@@ -1,0 +1,29 @@
+<h1>ユーザー内容画面</h1>
+<p>名前: <%= @user.name %></p>
+<p>email: <%= @user.email %></p>
+<p>タスク数: <%= @user.tasks.count%></p>
+<p>管理者権限:<%= @user.admin %></p>
+
+<table>
+    <tr>
+      <th>名前</th>
+      <th>詳細</th>
+      <th>終了期限</th>
+      <th>状態</th>
+      <th>優先順位</th>
+      <th>作成者</th>
+    </tr>
+  <tbody>
+      <% @tasks.each do |task| %>
+        <tr>
+          <td><%= task.name %></td>
+          <td><%= task.detail %></td>
+          <td><%= task.dead_line.strftime("%Y-%m-%d") %></td>
+          <td><%= task.status %></td>
+          <td><%= task.priority %></td>
+          <td><%= task.user.name %></td>
+        </tr>
+      <% end %>
+  </tbody>
+</table>
+<%= link_to "ユーザー一覧画面にもどる", admin_users_path %>

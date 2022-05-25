@@ -1,8 +1,9 @@
 require 'rails_helper'
 describe 'タスクモデル機能', type: :model do
   describe '検索機能' do
-    let!(:task) { FactoryBot.create(:task)}
-    let!(:second_task) { FactoryBot.create(:second_task) }
+    let!(:user) { FactoryBot.create(:admin_user) }
+    let!(:task) { FactoryBot.create(:task, user: user) }
+    let!(:second_task) { FactoryBot.create(:second_task, user: user) }
     context 'scopeメソッドでタイトルのあいまい検索をした場合' do
       it "検索キーワードを含むタスクが絞り込まれる" do
         expect(Task.search_name('０１')).to include(task)
@@ -26,21 +27,22 @@ describe 'タスクモデル機能', type: :model do
     end
   end
   describe 'バリデーションのテスト' do
+    let!(:user) { FactoryBot.create(:admin_user) }
+    let!(:task) { FactoryBot.create(:task, user: user) }
     context 'タスクのタイトルが空の場合' do
       it 'バリデーションにひっかる' do
-        task = Task.new(name: '', detail: '失敗テスト')
+        task = Task.new(name: '', detail: '失敗テスト', user: user )
         expect(task).not_to be_valid
       end
     end
-      context 'タスクの詳細が空の場合' do
+    context 'タスクの詳細が空の場合' do
       it 'バリデーションにひっかかる' do
-        task = Task.new(name: 'aaa', detail: '')
+        task = Task.new(name: 'aaa', detail: '', user: user)
         expect(task).not_to be_valid
       end
     end
     context 'タスクのタイトルと詳細に内容が記載されている場合' do
       it 'バリデーションが通る' do
-        task = FactoryBot.create(:task)
         expect(task).to be_valid
       end
     end

@@ -1,0 +1,20 @@
+<h3>以下の内容で、送信する。</h3>
+
+<%= form_with(model: [:admin,@user], url: admin_users_path, local: true) do |form| %>
+  <%= form.hidden_field :name %>
+  <%= form.hidden_field :email %>
+  <%= form.hidden_field :password %>
+  <%= form.hidden_field :password_confirmation %>
+  <%= form.hidden_field :admin %>
+
+  <p>名前:<%= @user.name %></p>
+  <p>email:<%= @user.email %></p>
+  <p>password:<%= @user.password %></p>
+  <p>password_confirmation:<%= @user.password_confirmation %></p>
+  <p>管理者権限:<%= @user.admin %></p>
+
+  <%= form.submit  "登録する" %>
+
+  <%= form.submit "戻る", name: 'back' %>
+
+<% end %>

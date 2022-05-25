@@ -17,6 +17,7 @@
     <th><%= link_to '終了期限', tasks_path(sort_expired: "true") %></th>
     <th>状態</th>
     <th><%= link_to '優先順位', tasks_path(sort_priority: "true") %></th>
+    <th>作成者</th>
   </tr>
 
 <% @tasks.each do |task| %>
@@ -26,6 +27,7 @@
     <td><%= task.dead_line.strftime("%Y-%m-%d") %></td>
     <td><%= task.status %></td>
     <td><%= task.priority %></td>
+    <td><%= task.user.name %></td>
 
     <td class="check"><%= link_to '確認',task_path(task.id) %></td>
     <td class="edit"><%= link_to "編集", edit_task_path(task.id) %></td>
@@ -34,4 +36,4 @@
 <% end %>
 </table>
 
-<%= paginate @tasks -%>
+<%= paginate @tasks %>

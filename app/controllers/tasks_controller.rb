@@ -2,23 +2,21 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
+    #@tasks = current_user.tasks
     if params[:sort_expired]
-      @tasks = Task.all.order(dead_line: :desc).page(params[:page])
+      @tasks = current_user.tasks.order(dead_line: :desc).page(params[:page])
     elsif params[:sort_priority]
-      @tasks = Task.all.order(priority: :asc).page(params[:page])
+      @tasks = current_user.tasks.order(priority: :asc).page(params[:page])
     else
-      @tasks = Task.all.order(created_at: :desc).page(params[:page])
+      @tasks = current_user.tasks.order(created_at: :desc).page(params[:page])
     end
 
     if params[:name].present? && params[:number].present?
-      #両方name and statusが成り立つ検索結果を返す
-      @tasks = Task.search_name(params[:name]).search_status(params[:number]).page(params[:page])
-      #渡されたパラメータがtask nameのみだったとき
+      @tasks = current_user.tasks.search_name(params[:name]).search_status(params[:number]).page(params[:page])
     elsif params[:name].present?
-      @tasks = Task.search_name(params[:name]).page(params[:page])
-      #渡されたパラメータがステータスのみだったとき
+      @tasks = current_user.tasks.search_name(params[:name]).page(params[:page])
     elsif params[:number].present?
-      @tasks = Task.search_status(params[:number]).page(params[:page])
+      @tasks = current_user.tasks.search_status(params[:number]).page(params[:page])
     end
   end
 
@@ -27,7 +25,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
     if params[:back]
       render :new
     else
@@ -59,7 +57,7 @@ class TasksController < ApplicationController
   end
 
   def confirm
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
     render :new if @task.invalid?
   end
 
