@@ -6,12 +6,16 @@
   <%= form.hidden_field :dead_line %>
   <%= form.hidden_field :status %>
   <%= form.hidden_field :priority %>
+  <%= form.hidden_field :label_ids %>
 
   <p>名前:<%= @task.name %></p>
   <p>詳細:<%= @task.detail %></p>
   <p>終了期限:<%= @task.dead_line.strftime("%Y-%m-%d")%></p>
   <p>状態:<%= @task.status %></p>
   <p>優先順位:<%= @task.priority %></p>
+  <p>ラベル:<% @task.labels.each do |label| %>
+                <%= label.name %>
+              <% end %></p>
 
   <%= form.submit  "登録する" %>
 

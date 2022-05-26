@@ -5,6 +5,11 @@ FactoryBot.define do
     dead_line { '2020-05-05'}
     status {'完了'}
     priority {'低'}
+
+    after(:build) do |task|
+      label = create(:label)
+      task.labellings << build(:labelling, task: task, label: label)
+    end
   end
   factory :second_task, class: Task do
     name { 'テストネーム０２' }
