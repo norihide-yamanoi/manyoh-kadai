@@ -12,7 +12,7 @@ class TasksController < ApplicationController
     end
 
     if params[:name].present? && params[:number].present?
-      @tasks =/Users/yamanoinorihide/Desktop/Users:.fileloc current_user.tasks.search_name(params[:name]).search_status(params[:number]).page(params[:page])
+      @tasks = current_user.tasks.search_name(params[:name]).search_status(params[:number]).page(params[:page])
     elsif params[:name].present?
       @tasks = current_user.tasks.search_name(params[:name]).page(params[:page])
     elsif params[:number].present?
