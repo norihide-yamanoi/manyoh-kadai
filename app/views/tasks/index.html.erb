@@ -3,9 +3,9 @@
 
 <%= form_with url: tasks_path, method: :get, local: true do |form| %>
   <%= form.text_field :name %>
-  <%= form.submit '検索' %>
-  <%= form.label :状態 %>
-  <%= form.select :number, Task.statuses.keys.to_a, { include_blank:'選択してください'} %>
+  <%= form.select :number, Task.statuses.keys.to_a, { include_blank:'状態検索'} %>
+  <%= form.select("label_id", Label.pluck(:name, :id), { include_blank: 'ラベル検索' }) %>
+  <%= form.submit '検索', name: nil %>
 <% end %>
 
 <%= link_to '新しくタスクを登録する', new_task_path, class:"btn btn-primary" %>
@@ -18,6 +18,7 @@
     <th>状態</th>
     <th><%= link_to '優先順位', tasks_path(sort_priority: "true") %></th>
     <th>作成者</th>
+    <th>ラベル</th>
   </tr>
 
 <% @tasks.each do |task| %>
@@ -28,6 +29,11 @@
     <td><%= task.status %></td>
     <td><%= task.priority %></td>
     <td><%= task.user.name %></td>
+    <td>
+      <% task.labels.each do |label| %>
+        <%= label.name %>
+      <% end %>
+    </td>
 
     <td class="check"><%= link_to '確認',task_path(task.id) %></td>
     <td class="edit"><%= link_to "編集", edit_task_path(task.id) %></td>
