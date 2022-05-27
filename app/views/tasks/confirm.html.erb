@@ -6,7 +6,8 @@
   <%= form.hidden_field :dead_line %>
   <%= form.hidden_field :status %>
   <%= form.hidden_field :priority %>
-  <%= form.hidden_field :label_ids %>
+  <%# label_ids = @task.label_ids.join.split(" ") %>
+  <%= form.hidden_field :label_ids[] %>
 
   <p>名前:<%= @task.name %></p>
   <p>詳細:<%= @task.detail %></p>
